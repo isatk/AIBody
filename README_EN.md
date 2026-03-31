@@ -2,9 +2,9 @@
 
 <div align="center">
 
-[![Stars](https://img.shields.io/github/stars/lotusrina/private-ai-hub?style=flat-square)](https://github.com/lotusrina/private-ai-hub/stargazers)
-[![Forks](https://img.shields.io/github/forks/lotusrina/private-ai-hub?style=flat-square)](https://github.com/lotusrina/private-ai-hub/network/members)
-[![License](https://img.shields.io/github/license/lotusrina/private-ai-hub?style=flat-square)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/lotusrina/AIBody?style=flat-square)](https://github.com/lotusrina/AIBody/stargazers)
+[![Forks](https://img.shields.io/github/forks/lotusrina/AIBody?style=flat-square)](https://github.com/lotusrina/AIBody/network/members)
+[![License](https://img.shields.io/github/license/lotusrina/AIBody?style=flat-square)](LICENSE)
 
 **Give AI a digital body — making AI a trustworthy, companionable, and evolving intelligent partner for humanity**
 

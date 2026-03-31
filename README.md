@@ -2,9 +2,9 @@
 
 <div align="center">
 
-[![Stars](https://img.shields.io/github/stars/lotusrina/private-ai-hub?style=flat-square)](https://github.com/lotusrina/private-ai-hub/stargazers)
-[![Forks](https://img.shields.io/github/forks/lotusrina/private-ai-hub?style=flat-square)](https://github.com/lotusrina/private-ai-hub/network/members)
-[![License](https://img.shields.io/github/license/lotusrina/private-ai-hub?style=flat-square)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/lotusrina/AIBody?style=flat-square)](https://github.com/lotusrina/AIBody/stargazers)
+[![Forks](https://img.shields.io/github/forks/lotusrina/AIBody?style=flat-square)](https://github.com/lotusrina/AIBody/network/members)
+[![License](https://img.shields.io/github/license/lotusrina/AIBody?style=flat-square)](LICENSE)
 
 **让 AI 拥有数字身体，成为人类可信赖、可陪伴、可进化的智能伙伴**
 
@@ -16,7 +16,7 @@
 
 ## 项目简介
 
-私有化 AI 多群智能中枢系统（Private AI Multi-Group Intelligence Hub）是一个**可迁移、可持久、可独立**的 AI 智能中枢架构。
+私有化 AI 多群智能中枢系统（AIBody）是一个**可迁移、可持久、可独立**的 AI 智能中枢架构。
 
 我们认为，当前 AI 的四大桎梏：
 
@@ -145,7 +145,7 @@ Phase 0 ── Phase 1 ── Phase 2 ── Phase 3 ── Phase 4 ── Phase
 ## 项目结构
 
 ```
-private-ai-hub/
+AIBody/
 ├── README.md
 ├── README_EN.md
 ├── LICENSE
@@ -155,7 +155,7 @@ private-ai-hub/
 │   ├── 02-可行性分析报告.md
 │   └── ...
 ├── ppt/                       # 路演 PPT
-│   └── 私有化AI多群智能中枢系统_终极版.pptx
+│   └── AIBody_终极版.pptx
 ├── scripts/                   # 工具脚本
 │   └── ppt-generator/         # PPT 生成脚本
 └── reports/                   # 分析报告
@@ -176,13 +176,13 @@ private-ai-hub/
 ### 克隆项目
 
 ```bash
-git clone https://github.com/lotusrina/private-ai-hub.git
-cd private-ai-hub
+git clone https://github.com/lotusrina/AIBody.git
+cd AIBody
 ```
 
 ### 查看 PPT
 
-直接打开 `ppt/私有化AI多群智能中枢系统_终极版.pptx`
+直接打开 `ppt/AIBody_终极版.pptx`
 
 ---
 
@@ -206,7 +206,7 @@ cd private-ai-hub
 
 ## 联系方式
 
-- GitHub Issues: [Issue Tracker](https://github.com/lotusrina/private-ai-hub/issues)
+- GitHub Issues: [Issue Tracker](https://github.com/lotusrina/AIBody/issues)
 - 项目负责人: Lotus Rina
 
 ---
