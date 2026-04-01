@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test</title>
+</head>
+<body>
+<div id="tree"></div>
+<script>
+var manifest = null;
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'manifest.json');
+xhr.onload = function() {
+  manifest = JSON.parse(xhr.responseText);
+  document.getElementById('tree').innerHTML = '<b>Loaded ' + manifest.flat.length + ' files</b><br>';
+  
+  // Build tree
+  var tree = {};
+  tree[''] = [];
+  
+  manifest.flat.forEach(function(f) {
+    var parts = f.path.split('/');
+    var name = parts[parts.length - 1];
+    var dir = parts.length > 1 ? parts.slice(0, -1).join('/') : '';
+    
+    if (!tree[dir]) tree[dir] = [];
+    
+    var exists = tree[dir].some(function(item) { return item.name === name; });
+    if (!exists) {
+      tree[dir].push({ name: name, path: f.path, type: f.type });
+    }
+    
+    if (f.type === 'dir' && !tree[f.path]) {
+      tree[f.path] = [];
+    }
+  });
+  
+  document.getElementById('tree').innerHTML += '<b>Root items:</b><br>';
+  tree[''].forEach(function(item) {
+    document.getElementById('tree').innerHTML += item.type + ': ' + item.name + '<br>';
+  });
+};
+xhr.send();
+</script>
+</body>
+</html>

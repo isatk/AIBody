@@ -3,304 +3,450 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>灵枢 — AIBody</title>
+<title>AIBody</title>
 <style>
-:root {
-  --bg: #0d1117; --sidebar-bg: #161b22; --border: #21262d;
-  --text: #e6edf3; --text-muted: #7d8590; --link: #58a6ff;
-  --folder: #54aeff; --header-bg: #161b22;
-}
+/* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.5; }
-.header { height: 56px; background: var(--header-bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 24px; position: sticky; top: 0; z-index: 100; gap: 12px; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.5; color: #24292f; background: #fff; }
+
+/* Header */
+.header-top { display: flex; align-items: center; height: 57px; padding: 0 24px; border-bottom: 1px solid #d0d7de; background: #fff; }
 .header-left { display: flex; align-items: center; gap: 8px; }
-.github-icon { width: 32px; height: 32px; }
-.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 14px; }
-.breadcrumb a { color: var(--link); text-decoration: none; }
-.breadcrumb a:hover { text-decoration: underline; }
-.breadcrumb span { color: var(--text-muted); }
-.breadcrumb .current { color: var(--text); }
-.header-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-.clone-btn { display: flex; align-items: center; gap: 6px; padding: 5px 12px; border: 1px solid var(--border); border-radius: 6px; color: var(--text); text-decoration: none; font-size: 13px; background: var(--bg); cursor: pointer; }
-.clone-btn:hover { background: var(--border); }
-.clone-btn svg { width: 14px; height: 14px; }
-.lang-btn { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); padding: 5px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
-.lang-btn:hover { background: var(--border); color: var(--text); }
-.repo-name { font-size: 16px; font-weight: 600; color: var(--text); text-decoration: none; }
-.layout { display: flex; max-width: 1280px; margin: 0 auto; }
-.sidebar { width: 240px; flex-shrink: 0; padding: 24px 16px 24px 24px; border-right: 1px solid var(--border); position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
-.sidebar-section { margin-bottom: 24px; }
-.sidebar-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-.sidebar-link { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 6px; color: var(--text-muted); text-decoration: none; font-size: 14px; cursor: pointer; margin-bottom: 2px; }
-.sidebar-link:hover, .sidebar-link.active { background: #1c2128; color: var(--text); }
-.sidebar-link svg { width: 16px; height: 16px; flex-shrink: 0; }
-.sidebar-link .count { margin-left: auto; font-size: 12px; color: var(--text-muted); background: #1c2128; padding: 0 6px; border-radius: 10px; }
-.main { flex: 1; min-width: 0; padding: 24px 32px; }
-.file-readme { background: var(--header-bg); border: 1px solid var(--border); border-radius: 6px 6px 0 0; padding: 16px 20px; border-bottom: none; }
-.file-readme-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
-.file-readme-title svg { width: 16px; height: 16px; }
-.file-readme a { color: var(--link); text-decoration: none; }
-.file-readme a:hover { text-decoration: underline; }
-.file-list-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--header-bg); border: 1px solid var(--border); border-bottom: none; border-radius: 6px 6px 0 0; }
-.file-list-header span { font-size: 14px; font-weight: 600; color: var(--text); }
-.file-list-header select { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); padding: 2px 6px; border-radius: 6px; font-size: 12px; }
-.file-list { border: 1px solid var(--border); border-radius: 0 0 6px 6px; overflow: hidden; }
-.file-list a { display: flex; align-items: center; padding: 6px 16px; text-decoration: none; border-bottom: 1px solid var(--border); color: var(--text); transition: background 0.1s; }
-.file-list a:last-child { border-bottom: none; }
-.file-list a:hover { background: #1c2128; }
-.file-icon { width: 16px; height: 16px; margin-right: 10px; flex-shrink: 0; }
-.file-name { flex: 1; font-size: 14px; }
-.file-name.folder { color: var(--folder); }
-.file-desc { font-size: 12px; color: var(--text-muted); margin-right: 16px; min-width: 200px; text-align: right; }
-.file-commit { font-size: 12px; color: var(--text-muted); min-width: 120px; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-@media (max-width: 768px) { .sidebar { display: none; } .file-desc, .file-commit { display: none; } }
+.github-logo { width: 32px; height: 32px; }
+.repo-link { font-weight: 600; color: #24292f; text-decoration: none; font-size: 16px; }
+.repo-link:hover { color: #0969da; }
+.separator { color: #57606a; }
+.repo-name { font-weight: 600; color: #24292f; text-decoration: none; }
+.repo-name:hover { color: #0969da; }
+.header-search { flex: 1; max-width: 272px; margin-left: 16px; }
+.header-search input { width: 100%; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 5px 12px; font-size: 14px; }
+.header-search input:focus { outline: none; border-color: #0969da; }
+.header-right { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+.header-right svg { width: 20px; height: 20px; color: #57606a; cursor: pointer; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; background: #d0d7de; }
+
+/* Tabs */
+.tabs { display: flex; padding: 0 24px; border-bottom: 1px solid #d0d7de; background: #fff; }
+.tab { padding: 12px 16px; font-size: 14px; font-weight: 500; color: #57606a; text-decoration: none; border-bottom: 2px solid transparent; display: flex; align-items: center; gap: 6px; }
+.tab:hover { color: #24292f; text-decoration: none; }
+.tab.active { color: #24292f; border-bottom-color: #f9826c; }
+.tab svg { width: 16px; height: 16px; }
+
+/* Main Layout */
+.layout { display: flex; }
+.sidebar { width: 272px; flex-shrink: 0; border-right: 1px solid #d0d7de; background: #f6f8fa; min-height: calc(100vh - 58px); display: flex; flex-direction: column; }
+.sidebar-header { padding: 12px 16px; border-bottom: 1px solid #d0d7de; display: flex; align-items: center; justify-content: space-between; background: #f6f8fa; position: sticky; top: 0; z-index: 10; }
+.sidebar-title { font-size: 14px; font-weight: 600; color: #24292f; }
+.branch-btn { display: flex; align-items: center; gap: 4px; padding: 4px 8px; border: 1px solid #d0d7de; border-radius: 6px; font-size: 12px; background: #fff; cursor: pointer; color: #24292f; }
+.branch-btn:hover { background: #f3f4f6; }
+
+/* File Tree */
+.file-tree { padding: 8px 0; flex: 1; overflow-y: auto; }
+.tree-item { display: flex; align-items: center; padding: 6px 12px; cursor: pointer; font-size: 13px; color: #24292f; gap: 4px; }
+.tree-item:hover { background: #eaeef2; }
+.tree-item.active { background: #b6d5f5; }
+.tree-toggle { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 10px; color: #57606a; transition: transform 0.1s; }
+.tree-toggle.open { transform: rotate(90deg); }
+.tree-toggle.hidden { visibility: hidden; }
+.tree-icon { width: 16px; height: 16px; flex-shrink: 0; margin-right: 6px; }
+.tree-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tree-children { padding-left: 20px; display: none; }
+.tree-children.open { display: block; }
+
+/* Clone */
+.clone-box { padding: 12px 16px; border-top: 1px solid #d0d7de; background: #f6f8fa; }
+.clone-label { font-size: 12px; color: #57606a; margin-bottom: 8px; font-weight: 600; }
+.clone-input { width: 100%; background: #fff; border: 1px solid #d0d7de; border-radius: 6px; padding: 6px 10px; font-size: 12px; font-family: monospace; color: #24292f; }
+
+/* Main Content */
+.main { flex: 1; min-width: 0; }
+
+/* File Header */
+.file-header { padding: 16px 24px; border-bottom: 1px solid #d0d7de; }
+.file-path { font-size: 20px; font-weight: 600; color: #24292f; margin-bottom: 8px; }
+.commit-info { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #57606a; }
+.commit-info a { color: #0969da; text-decoration: none; }
+.commit-info a:hover { text-decoration: underline; }
+
+/* Toolbar */
+.toolbar { display: flex; align-items: center; padding: 0 24px; border-bottom: 1px solid #d0d7de; }
+.tool-btn { padding: 8px 16px; font-size: 14px; color: #57606a; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; display: flex; align-items: center; gap: 6px; }
+.tool-btn:hover { color: #24292f; }
+.tool-btn.active { color: #24292f; border-bottom-color: #f9826c; font-weight: 500; }
+.toolbar-right { margin-left: auto; display: flex; gap: 4px; }
+.tool-btn-right { padding: 6px 8px; border: 1px solid #d0d7de; border-radius: 6px; background: #fff; cursor: pointer; margin: 6px 0 6px 4px; }
+.tool-btn-right:hover { background: #f3f4f6; }
+.tool-btn-right svg { width: 16px; height: 16px; color: #57606a; }
+
+/* Markdown Content - GitHub Style */
+.markdown-body { padding: 32px; max-width: 900px; font-size: 16px; line-height: 1.6; color: #24292f; }
+.markdown-body h1 { font-size: 28px; font-weight: 600; padding-bottom: 8px; margin: 0 0 16px; border-bottom: 1px solid #d0d7de; }
+.markdown-body h2 { font-size: 22px; font-weight: 600; padding-bottom: 6px; margin: 24px 0 12px; border-bottom: 1px solid #d0d7de; }
+.markdown-body h3 { font-size: 18px; font-weight: 600; margin: 20px 0 10px; }
+.markdown-body h4 { font-size: 16px; font-weight: 600; margin: 16px 0 8px; }
+.markdown-body p { margin: 12px 0; }
+.markdown-body a { color: #0969da; text-decoration: none; }
+.markdown-body a:hover { text-decoration: underline; }
+.markdown-body strong { font-weight: 600; }
+.markdown-body code { background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 6px; font-size: 85%; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
+.markdown-body pre { background: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto; margin: 12px 0; line-height: 1.45; }
+.markdown-body pre code { background: none; padding: 0; font-size: 85%; }
+.markdown-body ul, .markdown-body ol { padding-left: 24px; margin: 12px 0; }
+.markdown-body li { margin: 4px 0; }
+.markdown-body li + li { margin-top: 4px; }
+.markdown-body table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+.markdown-body th { background: #f6f8fa; padding: 8px 12px; border: 1px solid #d0d7de; text-align: left; font-weight: 600; font-size: 14px; }
+.markdown-body td { padding: 8px 12px; border: 1px solid #d0d7de; font-size: 14px; }
+.markdown-body tr:nth-child(even) { background: #f6f8fa; }
+.markdown-body blockquote { border-left: 4px solid #d0d7de; padding-left: 16px; color: #57606a; margin: 12px 0; font-style: italic; }
+.markdown-body hr { border: none; border-top: 1px solid #d0d7de; margin: 24px 0; }
+.markdown-body img { max-width: 100%; height: auto; }
+
+/* Code Block */
+.code-block { background: #0d1117; border-radius: 6px; margin: 12px 0; overflow: hidden; }
+.code-block .code-header { background: #161b22; padding: 8px 16px; border-bottom: 1px solid #30363d; font-size: 12px; color: #8b949e; font-family: monospace; }
+.code-block pre { background: #0d1117; padding: 16px; margin: 0; overflow-x: auto; }
+.code-block code { color: #c9d1d9; font-size: 13px; line-height: 1.6; }
+
+/* Blank State */
+.blank { padding: 80px 24px; text-align: center; color: #57606a; }
+.blank svg { width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.5; }
+.blank h3 { font-size: 18px; font-weight: 600; color: #24292f; margin-bottom: 8px; }
+
+@media (max-width: 768px) { .sidebar { display: none; } }
 </style>
 </head>
 <body>
-<div class="header">
+<div class="header-top">
   <div class="header-left">
-    <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-    <nav class="breadcrumb" id="breadcrumb"></nav>
+    <svg class="github-logo" viewBox="0 0 24 24" fill="#24292f"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+    <a class="repo-link" href="?">isatk</a>
+    <span class="separator">/</span>
+    <a class="repo-name" href="?">AIBody</a>
+  </div>
+  <div class="header-search">
+    <input type="text" placeholder="Type / to search">
   </div>
   <div class="header-right">
-    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
-    <button class="clone-btn" id="cloneBtn" onclick="copyClone()">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h9.586L14.25 2.65V12.5c0 .966.784 1.75 1.75 1.75v1.5C15.216 16 14 14.784 14 13.5V2.65L11.086 0H1.75C.784 0 0 .784 0 1.75v-1.5zM1 2.5v11h11V2.5L9.5 0v1.5h1.25c.414 0 .75.336.75.75v9.25H1v-1.5c0-.414.336-.75.75-.75H1zm12.5.5v1.25c0 .414-.336.75-.75.75H10.5v9.25h1.5V2.5h2.25v1.5H12.5zm.75 2.5h1.25c.966 0 1.75.784 1.75 1.75v6.5H15v-6.5c0-.414.336-.75.75-.75H16v8.75h1.5V4.5c0-.966-.784-1.75-1.75-1.75H15V2.5h1.5v1.25H15v1z"/></svg>
-      <span id="cloneBtnText">Clone</span>
-    </button>
+    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm1 13H7v-2h2v2zm0-4H7V5h2v4z"/></svg>
+    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zM1 1.75v12.5c0 .069.056.125.125.125h12.5c.069 0 .125-.056.125-.125V1.75c0-.069-.056-.125-.125-.125H1.25c-.069 0-.125.056-.125.125zm1.75.25c.069 0 .125.056.125.125v12.5c0 .069-.056.125-.125.125H11.5v2h1.25c.069 0 .125.056.125.125v1.25c0 .069-.056.125-.125.125H1.25c-.069 0-.125-.056-.125-.125v-1.25c0-.069.056-.125.125-.125h1.25v-2H1.125c-.069 0-.125-.056-.125-.125z"/></svg>
+    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 3.25a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zm5.677-.177L9.573.677A.25.25 0 0110 .854V2.5h1A2.5 2.5 0 0113.5 5v5.628a2.251 2.251 0 11-1.5 0V5a1 1 0 00-1-1h-1v1.646a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zM3.5 3.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0z"/></svg>
+    <div class="avatar"></div>
   </div>
 </div>
+<nav class="tabs">
+  <a class="tab active" href="#">
+    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8 15.75a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-2.5a.25.25 0 00-.25.25z"/></svg>
+    Code
+  </a>
+  <a class="tab" href="#">
+    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75C0 .784.784 0 1.75 0zM1 1.75v12.5c0 .069.056.125.125.125h12.5c.069 0 .125-.056.125-.125V1.75c0-.069-.056-.125-.125-.125H1.25c-.069 0-.125.056-.125.125zm1.75.25c.069 0 .125.056.125.125v12.5c0 .069-.056.125-.125.125H11.5v2h1.25c.069 0 .125.056.125.125v1.25c0 .069-.056.125-.125.125H1.25c-.069 0-.125-.056-.125-.125v-1.25c0-.069.056-.125.125-.125h1.25v-2H1.125c-.069 0-.125-.056-.125-.125z"/></svg>
+    Issues
+  </a>
+  <a class="tab" href="#">
+    <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 3.25a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zm5.677-.177L9.573.677A.25.25 0 0110 .854V2.5h1A2.5 2.5 0 0113.5 5v5.628a2.251 2.251 0 11-1.5 0V5a1 1 0 00-1-1h-1v1.646a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm0 9.5a.75.75 0 100 1.5.75.75 0 000-1.5zm9.25.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+    Pull requests
+  </a>
+</nav>
+
 <div class="layout">
   <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-title" id="t-repo">项目</div>
-      <a class="sidebar-link active" href="#" onclick="navigateTo('');return false;">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8 15.75a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-2.5a.25.25 0 00-.25.25z"/></svg>
-        <span id="repo-name">灵枢</span>
-      </a>
+    <div class="sidebar-header">
+      <span class="sidebar-title">Files</span>
+      <button class="branch-btn">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 016 7h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25z"/></svg>
+        master
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z"/></svg>
+      </button>
     </div>
-    <div class="sidebar-section">
-      <div class="sidebar-title" id="t-files">文件</div>
-      <a class="sidebar-link" href="#" onclick="navigateTo('research/');return false;">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V1.75C0 .784.784 0 1.75 0zm1.75.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75z"/></svg>
-        research
-      </a>
-      <a class="sidebar-link" href="#" onclick="navigateTo('docs/');return false;">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V1.75C0 .784.784 0 1.75 0zm1.75.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75z"/></svg>
-        docs
-      </a>
-      <a class="sidebar-link" href="#" onclick="navigateTo('reports/');return false;">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V1.75C0 .784.784 0 1.75 0zm1.75.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75z"/></svg>
-        reports
-      </a>
-      <a class="sidebar-link" href="#" onclick="navigateTo('ppt/');return false;">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V1.75C0 .784.784 0 1.75 0zm1.75.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75z"/></svg>
-        ppt
-      </a>
-      <a class="sidebar-link" href="#" onclick="navigateTo('scripts/');return false;">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zm1.75-.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H1.75z"/></svg>
-        scripts
-      </a>
+    <div class="file-tree" id="fileTree">
+      <div style="padding:12px 16px;color:#57606a">Loading...</div>
+    </div>
+    <div class="clone-box">
+      <div class="clone-label">Clone</div>
+      <input class="clone-input" value="git://192.168.1.69/灵枢-git.git" readonly onclick="this.select()">
     </div>
   </aside>
   <main class="main">
-    <div id="readme-area"></div>
-    <div class="file-list-header">
-      <span id="file-count">0 files</span>
-      <select onchange="sortFiles(this.value)">
-        <option value="name">Name</option>
-        <option value="modified">Last modified</option>
-      </select>
+    <div id="content">
+      <div class="blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <h3>Select a file to view</h3>
+        <p>Click on a file in the sidebar to view its contents</p>
+      </div>
     </div>
-    <div class="file-list" id="file-list">Loading...</div>
   </main>
 </div>
+
 <script>
-var LANG = localStorage.getItem('lang') || 'zh';
-var i18n = {
-  zh: { repo: '项目', files: '文件', clone: '克隆', copied: '已复制!', files_count: '个文件', no_files: '暂无文件', readme: '自述文件', name: '灵枢' },
-  en: { repo: 'Repository', files: 'Files', clone: 'Clone', copied: 'Copied!', files_count: 'files', no_files: 'No files', readme: 'README', name: 'AIBody' }
+// State
+var currentFile = '';
+var expanded = {};
+var manifest = null;
+
+// Load manifest
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'manifest.json');
+xhr.onload = function() {
+  manifest = JSON.parse(xhr.responseText);
+  renderTree();
 };
+xhr.send();
 
-function toggleLang() {
-  LANG = LANG === 'zh' ? 'en' : 'zh';
-  localStorage.setItem('lang', LANG);
-  location.reload();
+function getIcon(type) {
+  if (type === 'dir') {
+    return '<svg class="tree-icon" viewBox="0 0 16 16" fill="#54aeff"><path d="M1.75 1A1.75 1.75 0 000 2.75v10.5A1.75 1.75 0 001.75 15h12.5a1.75 1.75 0 001.75-1.75V2.75A1.75 1.75 0 0014.25 1H1.75zm1.75.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75z"/></svg>';
+  }
+  return '<svg class="tree-icon" viewBox="0 0 16 16" fill="#0969da"><path d="M3.75 1.5a.25.25 0 00-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6h-2.75A1.75 1.75 0 019 4.25V1.5H3.75zm-1.5.25a.25.25 0 01.25-.25h6.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75h-6.5a.75.75 0 01-.75-.75V1.75z"/></svg>';
 }
 
-function applyLang() {
-  var t = i18n[LANG];
-  document.getElementById('langBtn').textContent = LANG === 'zh' ? 'EN' : '中文';
-  document.getElementById('cloneBtnText').textContent = t.clone;
-  document.getElementById('t-repo').textContent = t.repo;
-  document.getElementById('t-files').textContent = t.files;
-  document.getElementById('repo-name').textContent = t.name;
-  document.title = t.name + ' — AIBody';
-}
-
-function getIcon(name, isDir) {
-  if (isDir) return '<svg class="file-icon" viewBox="0 0 16 16" fill="#54aeff"><path d="M1.75 1A1.75 1.75 0 000 2.75v10.5A1.75 1.75 0 001.75 15h12.5a1.75 1.75 0 001.75-1.75V2.75A1.75 1.75 0 0014.25 1H1.75zm1.75.25a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75z"/></svg>';
-  var ext = name.split('.').pop().toLowerCase();
-  var colors = { md:'#58a6ff', py:'#3572A5', js:'#f1e05a', ts:'#3178c6', json:'#e34c26', html:'#e34c26', css:'#563d7c', yml:'#cb171e', yaml:'#cb171e', toml:'#9c4221', svg:'#a074c4', png:'#a074c4', jpg:'#a074c4', jpeg:'#a074c4', gif:'#a074c4', pdf:'#bd2c00', txt:'#7d8590', pptx:'#bd873a', ppt:'#bd873a', xlsx:'#217346', xls:'#217346', doc:'#295f91', docx:'#295f91', zip:'#6e6e6e', gz:'#6e6e6e', gitignore:'#f1e05a', license:'#ea8a3a' };
-  var c = colors[ext] || '#7d8590';
-  return '<svg class="file-icon" viewBox="0 0 16 16" fill="'+c+'"><path d="M4.5 2a.5.5 0 01.5.5v11a.5.5 0 01-.5.5h7a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H5.5a.5.5 0 01-.5-.5V2.5a.5.5 0 01.5-.5h-1zM3 3h2.25a.5.5 0 01.5.5V3a.5.5 0 01-.5.5H3a.5.5 0 00-.5.5v9.5a.5.5 0 00.5.5h9.5a.5.5 0 00.5-.5v-2.75a.5.5 0 01.5-.5H14a.5.5 0 01.5.5v9.5a.5.5 0 01-.5.5H3a.5.5 0 01-.5-.5v-9.5a.5.5 0 01.5-.5z"/></svg>';
-}
-
-function navigateTo(path) {
-  currentPath = path;
-  loadDir(path);
-  updateBreadcrumb(path);
-}
-
-function updateBreadcrumb(path) {
-  var bc = document.getElementById('breadcrumb');
-  var parts = path.split('/').filter(function(p) { return p; });
-  var html = '<a href="#" onclick="navigateTo(\'\');return false;">' + i18n[LANG].name + '</a>';
-  var acc = '';
-  parts.forEach(function(p, i) {
-    acc += p + '/';
-    if (i === parts.length - 1) {
-      html += '<span>/</span><span class="current">' + p + '</span>';
-    } else {
-      html += '<span>/</span><a href="#" onclick="navigateTo(\'' + acc + '\');return false;">' + p + '</a>';
+function buildTree() {
+  var tree = {};
+  tree[''] = [];
+  
+  manifest.flat.forEach(function(f) {
+    var parts = f.path.split('/');
+    var name = parts[parts.length - 1];
+    var dir = parts.length > 1 ? parts.slice(0, -1).join('/') : '';
+    
+    if (!tree[dir]) tree[dir] = [];
+    
+    var exists = tree[dir].some(function(item) { return item.name === name; });
+    if (!exists) {
+      tree[dir].push({ name: name, path: f.path, type: f.type });
+    }
+    
+    if (f.type === 'dir' && !tree[f.path]) {
+      tree[f.path] = [];
     }
   });
-  bc.innerHTML = html;
+  
+  return tree;
 }
 
-function sortFiles(type) {
-  if (type === 'name') {
-    allFiles.sort(function(a, b) {
-      if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
-      return a.name.localeCompare(b.name);
-    });
-  }
-  renderFileList();
+function renderTree() {
+  if (!manifest) return;
+  
+  var tree = buildTree();
+  var html = renderNode('', tree);
+  document.getElementById('fileTree').innerHTML = html;
 }
 
-function renderFileList() {
-  var el = document.getElementById('file-list');
-  var t = i18n[LANG];
-  var visible = allFiles.filter(function(f) { return !f.name.startsWith('.'); });
-  document.getElementById('file-count').textContent = visible.length + ' ' + t.files_count;
-  var html = '';
-  visible.forEach(function(f) {
-    var isDir = f.type === 'dir';
-    var target = isDir ? 'href="#"' : 'href="' + currentPath + encodeURIComponent(f.name) + '" target="_blank"';
-    var cls = isDir ? 'folder' : '';
-    var size = f.size ? formatSize(f.size) : '';
-    var date = f.mtime ? formatDate(f.mtime) : '';
-    var onclick = isDir ? 'onclick="navigateTo(\'' + currentPath + f.name + '/\');return false;"' : '';
-    html += '<a ' + (isDir ? onclick : target) + '>' +
-      getIcon(f.name, isDir) +
-      '<span class="file-name ' + cls + '">' + f.name + '</span>' +
-      (size ? '<span class="file-desc">' + size + '</span>' : '') +
-      (date ? '<span class="file-commit">' + date + '</span>' : '') +
-      '</a>';
+function renderNode(dir, tree) {
+  var children = tree[dir] || [];
+  
+  children.sort(function(a, b) {
+    if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
+    return a.name.localeCompare(b.name);
   });
-  el.innerHTML = html || '<div style="padding:24px;color:#7d8590;text-align:center">' + t.no_files + '</div>';
+  
+  var html = '';
+  children.forEach(function(item) {
+    var isDir = item.type === 'dir';
+    var isOpen = expanded[item.path];
+    var isActive = currentFile === item.path;
+    
+    html += '<div class="tree-item' + (isActive ? ' active' : '') + '" data-path="' + item.path + '">';
+    
+    var toggleClass = isDir ? (isOpen ? 'open' : '') : 'hidden';
+    html += '<span class="tree-toggle ' + toggleClass + '" onclick="event.stopPropagation();toggleDir(\'' + item.path + '\')">▸</span>';
+    html += getIcon(item.type);
+    html += '<span class="tree-name" onclick="clickItem(\'' + item.path + '\', ' + isDir + ')">' + item.name + '</span>';
+    html += '</div>';
+    
+    if (isDir && tree[item.path]) {
+      html += '<div class="tree-children' + (isOpen ? ' open' : '') + '" id="children-' + item.path.replace(/\//g, '_') + '">';
+      html += renderNode(item.path, tree);
+      html += '</div>';
+    }
+  });
+  
+  return html;
 }
 
-function formatSize(bytes) {
-  if (!bytes) return '';
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
-  return (bytes/1024/1024).toFixed(1) + ' MB';
+function toggleDir(path) {
+  if (expanded[path]) {
+    delete expanded[path];
+  } else {
+    expanded[path] = true;
+  }
+  renderTree();
 }
 
-function formatDate(iso) {
-  if (!iso) return '';
-  return new Date(iso).toLocaleDateString(LANG === 'zh' ? 'zh-CN' : 'en-US', {year:'numeric',month:'short',day:'numeric'});
+function clickItem(path, isDir) {
+  if (isDir) {
+    toggleDir(path);
+  } else {
+    showFile(path);
+  }
 }
 
-function loadDir(path) {
+function showFile(path) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', path, true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      parseDir(xhr.responseText, path);
+  xhr.open('GET', path);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      currentFile = path;
+      var name = path.split('/').pop();
+      var ext = name.split('.').pop().toLowerCase();
+      var isMd = ['md','markdown','mdown','mkd'].indexOf(ext) >= 0;
+      var isScript = ['js','ts','py','sh','bat'].indexOf(ext) >= 0;
+
+      var html = '<div class="file-header">';
+      html += '<div class="file-path">' + escapeHtml(name) + '</div>';
+      html += '<div class="commit-info">';
+      html += '<span><a href="#">opencode</a> committed 9 hours ago</span>';
+      html += '</div></div>';
+
+      html += '<div class="toolbar">';
+      html += '<button class="tool-btn active">';
+      html += '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zM1 1.75v12.5c0 .069.056.125.125.125h12.5c.069 0 .125-.056.125-.125V1.75c0-.069-.056-.125-.125-.125H1.25c-.069 0-.125.056-.125.125z"/></svg>';
+      html += ' Preview</button>';
+      html += '<button class="tool-btn">';
+      html += '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v8.586A1.75 1.75 0 0114.25 15h-9a1.75 1.75 0 01-1.75-1.75v-1h.75c.69 0 1.25-.56 1.25-1.25V5.75a.25.25 0 00-.25-.25h-2.5a.25.25 0 00-.25.25v.75c0 .69.56 1.25 1.25 1.25h.75v1z"/></svg>';
+      html += ' Code</button>';
+      html += '<div class="toolbar-right">';
+      html += '<button class="tool-btn-right" title="Raw" onclick="window.open(\'' + path + '\')"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zM1 1.75v12.5c0 .069.056.125.125.125h12.5c.069 0 .125-.056.125-.125V1.75c0-.069-.056-.125-.125-.125H1.25c-.069 0-.125.056-.125.125z"/></svg></button>';
+      html += '<button class="tool-btn-right" title="Download" onclick="window.location=\'' + path + '\'"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 2A1.5 1.5 0 002 3.5v9A1.5 1.5 0 003.5 14h9a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0012.5 2h-9zm3.28 1.47a.75.75 0 010 1.06L5.56 6h6.19a.75.75 0 010 1.5H5.56l1.22 1.53a.75.75 0 11-1.14.94L3.18 7.94a.75.75 0 010-1.06l2.36-2.91z"/></svg></button>';
+      html += '</div></div>';
+
+      if (isMd) {
+        html += '<div class="markdown-body">' + parseMd(xhr.responseText) + '</div>';
+      } else if (isScript) {
+        html += '<div class="code-block"><div class="code-header">' + escapeHtml(name) + '</div><pre><code>' + escapeHtml(xhr.responseText) + '</code></pre></div>';
+      } else {
+        html += '<div class="code-block"><div class="code-header">' + escapeHtml(name) + '</div><pre><code>' + escapeHtml(xhr.responseText) + '</code></pre></div>';
+      }
+
+      document.getElementById('content').innerHTML = html;
+      
+      // Auto-expand parent dirs
+      var parts = path.split('/');
+      for (var i = 1; i < parts.length; i++) {
+        expanded[parts.slice(0, i).join('/')] = true;
+      }
+      renderTree();
+      history.pushState({file:path}, '', '?p=' + encodeURIComponent(path));
     }
   };
   xhr.send();
 }
 
-function parseDir(html, path) {
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(html, 'text/html');
-  var rows = doc.querySelectorAll('tr');
-  allFiles = [];
-  rows.forEach(function(row) {
-    var cells = row.querySelectorAll('td');
-    if (cells.length < 3) return;
-    var name = cells[1].textContent.trim().replace(/\/$/, '') || cells[1].querySelector('a')?.textContent?.trim() || '';
-    if (!name || name === 'Name') return;
-    var isDir = cells[1].textContent.trim().endsWith('/') || name.includes('.') === false;
-    var size = parseInt(cells[0].textContent.replace(/[^\d]/g,'')) || 0;
-    var mtime = cells.length >= 3 ? cells[2]?.textContent?.trim() || '' : '';
-    var dateStr = mtime ? new Date(mtime).toISOString() : '';
-    allFiles.push({ name: name, type: isDir ? 'dir' : 'file', size: size, mtime: dateStr });
-  });
-  allFiles.sort(function(a, b) {
-    if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
-    return a.name.localeCompare(b.name);
-  });
-  renderFileList();
-  if (path === '') loadReadme();
-  else document.getElementById('readme-area').innerHTML = '';
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function loadReadme() {
-  var files = ['README.md', 'README_EN.md', 'readme.md'];
-  var t = i18n[LANG];
-  var found = false;
-  function tryNext(i) {
-    if (i >= files.length) { document.getElementById('readme-area').innerHTML = ''; return; }
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', files[i], true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200 && !found) {
-          found = true;
-          var md = xhr.responseText;
-          md = md.replace(/^### (.+)$/gm, '<h3 style="color:#e6edf3;font-size:15px;margin:14px 0 6px;font-weight:600">$1</h3>');
-          md = md.replace(/^## (.+)$/gm, '<h2 style="color:#e6edf3;font-size:18px;margin:18px 0 8px;font-weight:600;border-bottom:1px solid #21262d;padding-bottom:6px">$1</h2>');
-          md = md.replace(/^# (.+)$/gm, '<h1 style="color:#e6edf3;font-size:24px;margin:0 0 6px;font-weight:600">$1</h1>');
-          md = md.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-          md = md.replace(/\*(.+?)\*/g, '<em>$1</em>');
-          md = md.replace(/`([^`]+)`/g, '<code style="background:#1c2128;padding:2px 6px;border-radius:4px;font-size:13px">$1</code>');
-          md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#58a6ff;text-decoration:none">$1</a>');
-          md = md.replace(/^\|(.+)$/gm, '$1');
-          md = md.replace(/\n\n+/g, '</p><p style="color:#7d8590;margin:8px 0;line-height:1.6">');
-          md = md.replace(/\n/g, '<br>');
-          document.getElementById('readme-area').innerHTML = '<div class="file-readme"><div class="file-readme-title"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M7.75 0a.75.75 0 01.75.75v8.69l5.47-5.47a.75.75 0 111.06 1.06l-6.22 6.22H15.5a.75.75 0 010 1.5h-7.25a.75.75 0 01-.75-.75V.75A.75.75 0 017.75 0zm-6.5 9.5h7.25a.75.75 0 01.75.75v1.25a.75.75 0 01-.75.75H1.25a.75.75 0 110-1.5v-.75c0-.414.336-.75.75-.75z"/></svg> README.md</div><p style="color:#7d8590;margin:8px 0;line-height:1.6;font-size:14px">' + md + '</p></div>';
-        } else if (xhr.status === 404) {
-          tryNext(i + 1);
-        }
-      }
-    };
-    xhr.send();
-  }
-  tryNext(0);
-}
-
-function copyClone() {
-  var url = 'git://192.168.1.69/灵枢-git.git';
-  var t = i18n[LANG];
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(function() {
-      var btn = document.getElementById('cloneBtnText');
-      btn.textContent = t.copied;
-      setTimeout(function() { btn.textContent = t.clone; }, 2000);
+function parseMd(md) {
+  // Remove front matter
+  md = md.replace(/^---[\s\S]*?---\n/, '');
+  
+  // Headers
+  md = md.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  md = md.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  md = md.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  md = md.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+  
+  // Bold/Italic
+  md = md.replace(/\*\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  md = md.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  md = md.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  md = md.replace(/_(.+?)_/g, '<em>$1</em>');
+  
+  // Inline code
+  md = md.replace(/``([^`]+)``/g, '<code>$1</code>');
+  md = md.replace(/`([^`]+)`/g, '<code>$1</code>');
+  
+  // Links
+  md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+  
+  // Horizontal rule
+  md = md.replace(/^---$/gm, '<hr>');
+  
+  // Blockquote
+  md = md.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  
+  // Code blocks
+  md = md.replace(/```(\w*)\n([\s\S]*?)```/g, function(m, lang, code) {
+    return '<div class="code-block"><div class="code-header">' + lang + '</div><pre><code>' + code.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</code></pre></div>';
+  });
+  
+  // Tables - match table with separator and body
+  md = md.replace(/(\|.+\|\s*\n)\|(?:[-:]+\|)+\s*\n((?:\|.+\|\s*\n?)*)/g, function(match, headerLine, body) {
+    var html = '<table>';
+    // Header
+    var headerCells = headerLine.trim().split('|').filter(function(c) { return c.trim(); });
+    html += '<thead><tr>';
+    headerCells.forEach(function(h) { 
+      html += '<th>' + h.trim() + '</th>'; 
     });
-  } else {
-    prompt('Copy this URL:', url);
-  }
+    html += '</tr></thead>';
+    // Body
+    html += '<tbody>';
+    var rows = body.trim().split('\n');
+    rows.forEach(function(row) {
+      row = row.trim();
+      if (!row) return;
+      var cells = row.split('|').filter(function(c) { return c.trim(); });
+      html += '<tr>';
+      cells.forEach(function(c) { 
+        html += '<td>' + c.trim() + '</td>'; 
+      });
+      html += '</tr>';
+    });
+    html += '</tbody></table>';
+    return html;
+  });
+  
+  // Unordered lists
+  md = md.replace(/^[\*\-] (.+)$/gm, '<li>$1</li>');
+  md = md.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+  
+  // Ordered lists
+  md = md.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+  
+  // Paragraphs
+  var lines = md.split('\n');
+  var result = [];
+  var inPre = false;
+  var inBlockquote = false;
+  
+  lines.forEach(function(line) {
+    if (line.startsWith('<div class="code-block') || line.startsWith('<pre>')) inPre = true;
+    if (line.startsWith('</div>') || line.startsWith('</pre>')) inPre = false;
+    
+    if (!inPre && line.trim() && !line.startsWith('<') && !line.startsWith('#') && !line.match(/^\|/)) {
+      result.push('<p>' + line + '</p>');
+    } else {
+      result.push(line);
+    }
+  });
+  
+  return result.join('\n');
 }
 
-var currentPath = '';
-var allFiles = [];
-applyLang();
-navigateTo('');
+// URL handling
+function init() {
+  var params = new URLSearchParams(window.location.search);
+  var p = params.get('p');
+  if (p) showFile(decodeURIComponent(p));
+}
+
+window.onpopstate = function(e) {
+  if (e.state && e.state.file) {
+    currentFile = e.state.file;
+    showFile(e.state.file);
+  }
+};
+
+// Wait for manifest then init
+function waitForManifest() {
+  if (manifest) {
+    init();
+  } else {
+    setTimeout(waitForManifest, 100);
+  }
+}
+waitForManifest();
 </script>
 </body>
 </html>

@@ -1,0 +1,344 @@
+{
+  "flat": [
+    {
+      "type": "dir",
+      "name": ".github",
+      "path": ".github"
+    },
+    {
+      "type": "file",
+      "name": "SafetyRules.md",
+      "path": ".github/SafetyRules.md",
+      "size": 1024
+    },
+    {
+      "type": "dir",
+      "name": "docs",
+      "path": "docs"
+    },
+    {
+      "type": "file",
+      "name": "06-路演PPT内容定稿.md",
+      "path": "docs/06-路演PPT内容定稿.md",
+      "size": 6343
+    },
+    {
+      "type": "file",
+      "name": "PRD-灵枢产品需求文档V1.1.md",
+      "path": "docs/PRD-灵枢产品需求文档V1.1.md",
+      "size": 12597
+    },
+    {
+      "type": "file",
+      "name": "index_test.html",
+      "path": "index_test.html",
+      "size": 1165
+    },
+    {
+      "type": "file",
+      "name": "LICENSE",
+      "path": "LICENSE",
+      "size": 1067
+    },
+    {
+      "type": "dir",
+      "name": "ppt",
+      "path": "ppt"
+    },
+    {
+      "type": "file",
+      "name": "私有化AI多群智能中枢系统.pptx",
+      "path": "ppt/私有化AI多群智能中枢系统.pptx",
+      "size": 45536
+    },
+    {
+      "type": "file",
+      "name": "私有化AI多群智能中枢系统_终极版.pptx",
+      "path": "ppt/私有化AI多群智能中枢系统_终极版.pptx",
+      "size": 47787
+    },
+    {
+      "type": "file",
+      "name": "README.md",
+      "path": "README.md",
+      "size": 6916
+    },
+    {
+      "type": "file",
+      "name": "README_EN.md",
+      "path": "README_EN.md",
+      "size": 5464
+    },
+    {
+      "type": "dir",
+      "name": "reports",
+      "path": "reports"
+    },
+    {
+      "type": "file",
+      "name": "02-项目分析-gstack源码研究.md",
+      "path": "reports/02-项目分析-gstack源码研究.md",
+      "size": 7080
+    },
+    {
+      "type": "file",
+      "name": "03-项目分析-OpenClaw源码研究.md",
+      "path": "reports/03-项目分析-OpenClaw源码研究.md",
+      "size": 5996
+    },
+    {
+      "type": "file",
+      "name": "05-深度解析-gstack七大角色.md",
+      "path": "reports/05-深度解析-gstack七大角色.md",
+      "size": 8281
+    },
+    {
+      "type": "dir",
+      "name": "research",
+      "path": "research"
+    },
+    {
+      "type": "file",
+      "name": "00-目录.md",
+      "path": "research/00-目录.md",
+      "size": 997
+    },
+    {
+      "type": "file",
+      "name": "01-三仓库核心分析与融合方案.md",
+      "path": "research/01-三仓库核心分析与融合方案.md",
+      "size": 3404
+    },
+    {
+      "type": "file",
+      "name": "02-技术栈分析与最先进方案.md",
+      "path": "research/02-技术栈分析与最先进方案.md",
+      "size": 3177
+    },
+    {
+      "type": "file",
+      "name": "03-类Telegram自建IM客户端技术方案.md",
+      "path": "research/03-类Telegram自建IM客户端技术方案.md",
+      "size": 3227
+    },
+    {
+      "type": "dir",
+      "name": "scripts",
+      "path": "scripts"
+    },
+    {
+      "type": "file",
+      "name": "一键部署本地服务.bat",
+      "path": "scripts/一键部署本地服务.bat",
+      "size": 878
+    },
+    {
+      "type": "file",
+      "name": "启动Git服务.bat",
+      "path": "scripts/启动Git服务.bat",
+      "size": 407
+    },
+    {
+      "type": "file",
+      "name": "启动HTTP服务.bat",
+      "path": "scripts/启动HTTP服务.bat",
+      "size": 342
+    },
+    {
+      "type": "file",
+      "name": "执行记录-2026-03-31.md",
+      "path": "执行记录-2026-03-31.md",
+      "size": 3489
+    },
+    {
+      "type": "file",
+      "name": "私有化AI多群智能中枢系统_终极版.pptx",
+      "path": "私有化AI多群智能中枢系统_终极版.pptx",
+      "size": 47787
+    },
+    {
+      "type": "file",
+      "name": "部署记录-2026-04-01.md",
+      "path": "部署记录-2026-04-01.md",
+      "size": 1572
+    }
+  ],
+  "tree": {
+    "": [
+      {
+        "name": ".github",
+        "path": ".github",
+        "type": "dir"
+      },
+      {
+        "name": "docs",
+        "path": "docs",
+        "type": "dir"
+      },
+      {
+        "name": "index_test.html",
+        "path": "index_test.html",
+        "type": "file",
+        "size": 1165
+      },
+      {
+        "name": "LICENSE",
+        "path": "LICENSE",
+        "type": "file",
+        "size": 1067
+      },
+      {
+        "name": "ppt",
+        "path": "ppt",
+        "type": "dir"
+      },
+      {
+        "name": "README.md",
+        "path": "README.md",
+        "type": "file",
+        "size": 6916
+      },
+      {
+        "name": "README_EN.md",
+        "path": "README_EN.md",
+        "type": "file",
+        "size": 5464
+      },
+      {
+        "name": "reports",
+        "path": "reports",
+        "type": "dir"
+      },
+      {
+        "name": "research",
+        "path": "research",
+        "type": "dir"
+      },
+      {
+        "name": "scripts",
+        "path": "scripts",
+        "type": "dir"
+      },
+      {
+        "name": "执行记录-2026-03-31.md",
+        "path": "执行记录-2026-03-31.md",
+        "type": "file",
+        "size": 3489
+      },
+      {
+        "name": "私有化AI多群智能中枢系统_终极版.pptx",
+        "path": "私有化AI多群智能中枢系统_终极版.pptx",
+        "type": "file",
+        "size": 47787
+      },
+      {
+        "name": "部署记录-2026-04-01.md",
+        "path": "部署记录-2026-04-01.md",
+        "type": "file",
+        "size": 1572
+      }
+    ],
+    ".github": [
+      {
+        "name": "SafetyRules.md",
+        "path": ".github/SafetyRules.md",
+        "type": "file",
+        "size": 1024
+      }
+    ],
+    "docs": [
+      {
+        "name": "06-路演PPT内容定稿.md",
+        "path": "docs/06-路演PPT内容定稿.md",
+        "type": "file",
+        "size": 6343
+      },
+      {
+        "name": "PRD-灵枢产品需求文档V1.1.md",
+        "path": "docs/PRD-灵枢产品需求文档V1.1.md",
+        "type": "file",
+        "size": 12597
+      }
+    ],
+    "ppt": [
+      {
+        "name": "私有化AI多群智能中枢系统.pptx",
+        "path": "ppt/私有化AI多群智能中枢系统.pptx",
+        "type": "file",
+        "size": 45536
+      },
+      {
+        "name": "私有化AI多群智能中枢系统_终极版.pptx",
+        "path": "ppt/私有化AI多群智能中枢系统_终极版.pptx",
+        "type": "file",
+        "size": 47787
+      }
+    ],
+    "reports": [
+      {
+        "name": "02-项目分析-gstack源码研究.md",
+        "path": "reports/02-项目分析-gstack源码研究.md",
+        "type": "file",
+        "size": 7080
+      },
+      {
+        "name": "03-项目分析-OpenClaw源码研究.md",
+        "path": "reports/03-项目分析-OpenClaw源码研究.md",
+        "type": "file",
+        "size": 5996
+      },
+      {
+        "name": "05-深度解析-gstack七大角色.md",
+        "path": "reports/05-深度解析-gstack七大角色.md",
+        "type": "file",
+        "size": 8281
+      }
+    ],
+    "research": [
+      {
+        "name": "00-目录.md",
+        "path": "research/00-目录.md",
+        "type": "file",
+        "size": 997
+      },
+      {
+        "name": "01-三仓库核心分析与融合方案.md",
+        "path": "research/01-三仓库核心分析与融合方案.md",
+        "type": "file",
+        "size": 3404
+      },
+      {
+        "name": "02-技术栈分析与最先进方案.md",
+        "path": "research/02-技术栈分析与最先进方案.md",
+        "type": "file",
+        "size": 3177
+      },
+      {
+        "name": "03-类Telegram自建IM客户端技术方案.md",
+        "path": "research/03-类Telegram自建IM客户端技术方案.md",
+        "type": "file",
+        "size": 3227
+      }
+    ],
+    "scripts": [
+      {
+        "name": "一键部署本地服务.bat",
+        "path": "scripts/一键部署本地服务.bat",
+        "type": "file",
+        "size": 878
+      },
+      {
+        "name": "启动Git服务.bat",
+        "path": "scripts/启动Git服务.bat",
+        "type": "file",
+        "size": 407
+      },
+      {
+        "name": "启动HTTP服务.bat",
+        "path": "scripts/启动HTTP服务.bat",
+        "type": "file",
+        "size": 342
+      }
+    ]
+  }
+}
