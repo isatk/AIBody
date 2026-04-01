@@ -1,197 +1,135 @@
-# AIBody — 让AI拥有数字身体
+# 灵枢 (AIBody)
 
-<div align="center">
+> 私有化AI智能中枢 - 让AI拥有持久记忆、自主规划、跨场景迁移的能力
 
-[![Stars](https://img.shields.io/github/stars/isatk/AIBody?style=flat-square)](https://github.com/isatk/AIBody/stargazers)
-[![Forks](https://img.shields.io/github/forks/isatk/AIBody?style=flat-square)](https://github.com/isatk/AIBody/network/members)
-[![License](https://img.shields.io/github/license/isatk/AIBody?style=flat-square)](LICENSE)
-
-**让AI拥有可迁移、可持久、可独立的数字身体，成为人类一生的智能伙伴**
-
-[English](./README_EN.md) · [中文](./README.md)
-
-</div>
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/isatk/AIBody?style=social)](https://github.com/isatk/AIBody)
+[![Gitee Stars](https://gitee.com/lotusisatk/aibody/badge/star.svg?theme=gitee)](https://gitee.com/lotusisatk/aibody)
 
 ---
 
-## 一句话定义
-
-> **AIBody** 是一个"AI数字身体"架构——让AI拥有持久记忆、自主规划、跨场景迁移的能力，真正成为人类可信赖、可陪伴、可进化的智能伙伴。
-
----
-
-## 背景：为什么需要"AI数字身体"？
-
-当前AI存在四大桎梏：
-
-| 痛点 | 现状 | 愿景 |
-|------|------|------|
-| 孤岛智能 | AI依附单一载体，跨场景无法迁移 | 无界陪伴 |
-| 短时智能 | 上下文割裂，无长期记忆 | 长久懂你 |
-| 转瞬智能 | 系统崩溃不可复活，数据全丢失 | 稳定同行 |
-| 有限智能 | 能力碎片化，无法协同进化 | 无限适配 |
-
-**AIBody的使命**：打破这四大桎梏，让AI成为跨越时间的持久伙伴。
-
----
-
-## 核心架构
+## 产品架构
 
 ```
-┌──────────────────────────────────────────────┐
-│                 IM 通道层                     │
-│      Telegram · Discord · WhatsApp · Signal    │
-└──────────────────────┬───────────────────────┘
-                       ↓
-┌──────────────────────┴───────────────────────┐
-│               gstack 大脑层                    │
-│                                               │
-│   ① 记状态  —  持久记忆所有交互与需求         │
-│   ② 选角色  —  精准调度专业AI能力             │
-│   ③ 控流程  —  智能编排任务，灵活响应          │
-└──────────────────────┬───────────────────────┘
-                       ↓
-┌──────────────────────┴───────────────────────┐
-│             OpenClaw 执行层                    │
-│  多渠道输出 · 工具执行 · Agent调度            │
-└──────────────────────┬───────────────────────┘
-                       ↓
-┌──────────────────────┴───────────────────────┐
-│              可插拔智能体层                    │
-│  💻 coding  🔧 ops  🔍 testing             │
-│  📚 docs  ✨ personal  🚀 research            │
-└──────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│                    灵枢产品                              │
+│                  完整的私有化AI中枢                         │
+│                                                        │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │              灵枢App客户端层                      │  │
+│  │     Flutter (移动/桌面) │ React (Web)           │  │
+│  └─────────────────────────────────────────────────┘  │
+│                         ↓ WebSocket/HTTPS               │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │              灵枢服务层 (Go)                      │  │
+│  │   API网关 │ 任务队列 │ 即时ACK │ 进度推送        │  │
+│  └─────────────────────────────────────────────────┘  │
+│                         ↓ gRPC                         │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │              ★ 灵枢引擎 ★                          │  │
+│  │         基于 openclaw 构建                        │  │
+│  │   Gateway │ Agent │ Memory │ Skills │ Plugins    │  │
+│  └─────────────────────────────────────────────────┘  │
+│                         ↓                               │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │              能力层                              │  │
+│  │   gstack技能 (23) │ agency智能体 (179)          │  │
+│  └─────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
 ```
-
-### 三大核心原则
-
-| 原则 | 含义 |
-|------|------|
-| 极简内核 | 聚焦核心服务，不做冗余设计，响应更快更稳 |
-| 解耦插拔 | 能力完全解耦，按需加载，从日常生活到专业科研都能适配 |
-| 持久复活 | 全状态持久化，崩溃可恢复，迁移可续跑，AI永生 |
-
----
-
-## 为人类带来的价值
-
-| 能力 | 说明 |
-|------|------|
-| 🌍 场景独立 | 跨场景精准匹配，在家/工作/户外，AI从不脱节 |
-| 🧬 记忆永生 | AI记忆长期留存持续进化，做你一生的伙伴 |
-| 🚀 能力进化 | AI按需加载无限升级，满足所有阶段的所有需求 |
-| ⚡ 行为自主 | AI自主规划落地任务，你专注更有价值的创造 |
-| 🔒 存在独立 | AI私有化独立运行，数据更安全隐私更有保障 |
-
----
 
 ## 技术栈
 
-| 层级 | 技术 |
-|------|------|
-| AI网关 | OpenClaw（多渠道、多模型、本地优先） |
-| 工作流引擎 | gstack（YC CEO开源，虚拟工程团队） |
-| 运行时 | Node.js ≥ 18 / Bun（可选） |
-| 存储 | SQLite · Redis · 文件持久化 |
-| 通信渠道 | Telegram · Discord · WhatsApp · Signal |
+| 层级 | 技术 | 说明 |
+|------|------|------|
+| **客户端** | Flutter / React / Tauri | 跨平台UI |
+| **服务层** | Go + Gin + Redis | 高性能API网关 |
+| **引擎层** | Node.js + openclaw | AI执行引擎 |
+| **能力层** | gstack (23技能) + agency (179智能体) | 技能和智能体库 |
 
-**融合技术栈（2026升级方向）**：Bun + Hono + LangGraph + Tauri 2.0 + MCP协议
-
----
-
-## 项目结构
+## 目录结构
 
 ```
-AIBody/
-├── README.md
-├── README_EN.md
-├── LICENSE
-├── .gitignore
-│
-├── research/              ← 核心研究文档
-│   ├── 01-三仓库核心分析与融合方案.md
-│   ├── 02-技术栈分析与最先进方案.md
-│   └── 03-类Telegram自建IM客户端技术方案.md
-│
-├── docs/
-│   └── 06-路演PPT内容定稿.md
-│
-├── reports/              ← 源码分析报告
-│   ├── 02-项目分析-gstack源码研究.md
-│   ├── 03-项目分析-OpenClaw源码研究.md
-│   └── 05-深度解析-gstack七大角色.md
-│
-├── ppt/
-│   └── 灵枢_终极版.pptx
-│
-└── scripts/
+灵枢/
+├── src/
+│   ├── client/          # 客户端层
+│   │   ├── web/         # Web端 (React)
+│   │   ├── mobile/      # 移动端 (Flutter)
+│   │   └── desktop/     # 桌面端 (Tauri)
+│   ├── service/         # 服务层 (Go)
+│   │   └── go/          # Go服务
+│   ├── engine/          # 引擎层 (Node.js + openclaw)
+│   │   ├── openclaw/    # openclaw核心
+│   │   ├── gstack/      # gstack技能集成
+│   │   └── agency/       # agency智能体集成
+│   └── capabilities/    # 能力层
+│       ├── skills/      # 技能定义
+│       └── agents/      # 智能体定义
+├── deploy/              # 部署配置
+│   ├── docker/          # Docker Compose
+│   └── k8s/             # Kubernetes
+├── docs/                # 文档
+├── tests/               # 测试
+├── scripts/             # 脚本
+└── config/              # 配置文件
 ```
-
----
-
-## 路线图
-
-```
-Phase 0 ── Phase 1 ── Phase 2 ── Phase 3 ── Phase 4 ── Phase 5
-  │         │         │         │         │         │
- M1        M2        M3        M4        M5
-标准奠基  架构验证   生态启动  多场景落地  美好实现
-已完成    进行中     待启动     规划中      愿景
-```
-
-| 里程碑 | 状态 | 描述 |
-|--------|------|------|
-| M1: 标准奠基 | ✅ | AI服务人类标准体系落地 |
-| M2: 架构验证 | 🔄 进行中 | AI核心服务架构技术验证 |
-| M3: 生态启动 | ⬜ 待启动 | 全球AI开源生态建立 |
-| M4: 多场景落地 | ⬜ 规划中 | AI融入生产生活各场景 |
-| M5: 美好实现 | 🌟 愿景 | AI与人类共生共荣 |
-
----
-
-## 开源生态理念
-
-- 🤝 **规范模板化** — 所有AI服务规范固化为可执行提示词模板
-- 🌍 **生态全球化** — 模板库开源，由全人类共同迭代
-- 🧬 **基因持久化** — 模板成为AI服务的核心数字基因
-- ✨ **未来共创化** — 人人可参与，共同塑造AI美好未来
-
----
 
 ## 快速开始
 
+### 前置要求
+
+- Node.js >= 22.12
+- Go >= 1.21
+- Docker & Docker Compose
+- MySQL 8.0
+- Redis 7.0+
+
+### 安装
+
 ```bash
-# 克隆项目
+# 克隆仓库
 git clone https://github.com/isatk/AIBody.git
 cd AIBody
 
-# 查看PPT了解项目愿景
-open ppt/灵枢_终极版.pptx
+# 启动Docker服务
+docker-compose up -d
 
-# 阅读研究文档
-open research/
+# 安装依赖
+cd src/engine && npm install
+cd src/service/go && go mod download
+
+# 启动服务
+./scripts/dev.sh
 ```
 
----
+## 核心功能
 
-## 参与贡献
+- ✅ **即时ACK** - 100ms内确认收到消息
+- ✅ **任务队列** - 多任务管理，支持优先级
+- ✅ **进度可视化** - 实时任务进度推送
+- ✅ **gstack技能** - 23个工程技能
+- ✅ **agency智能体** - 179个专家智能体
+- ✅ **私有化部署** - 完全自主，数据不出公网
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改
-4. 推送分支
-5. 创建 Pull Request
+## 开发文档
 
----
+- [PRD V1.7](./docs/PRD-V1.7.md) - 产品需求文档
+- [验证报告](./docs/PRD-V1.7-Verification-Checklist.md) - PRD验证结果
+- [执行记录](./执行记录-2026-04-01-v1.6.md) - 开发执行记录
 
 ## 开源协议
 
-[MIT License](./LICENSE) — 可自由使用、修改、商业化。
+本项目采用 [MIT](LICENSE) 开源协议。
+
+## 相关仓库
+
+| 仓库 | 地址 | 说明 |
+|------|------|------|
+| 主仓库 (GitHub) | https://github.com/isatk/AIBody | 开发主仓库 |
+| 镜像 (Gitee) | https://gitee.com/lotusisatk/aibody | 国内镜像 |
+| gstack | https://github.com/garrytan/gstack | 技能库原始版 |
+| openclaw | https://github.com/openclaw/openclaw | 引擎底层框架 |
 
 ---
 
-<div align="center">
-
-**以AI之力，筑人类美好未来**
-
-</div>
+_Last updated: 2026-04-01_

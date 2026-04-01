@@ -1,43 +1,53 @@
-# Node
+# Dependencies
 node_modules/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+vendor/
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
+# Build outputs
+dist/
+build/
+*.o
+*.a
 *.so
-.Python
-venv/
-env/
-.venv/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-*~
-
-# OS
 .DS_Store
-Thumbs.db
 
-# Build outputs
-dist/
-build/
-*.egg-info/
-
-# Temporary files
-*.tmp
-*.bak
-*.orig
-
-# Private files (secrets)
+# Environment
 .env
 .env.local
-secrets.json
-credentials.json
+.env.*.local
+config.yaml
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test
+coverage/
+.nyc_output/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker
+.docker/
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# MinIO data
+minio_data/
+
+# Prometheus
+prometheus_data/
