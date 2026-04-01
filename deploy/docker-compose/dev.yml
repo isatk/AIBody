@@ -1,0 +1,205 @@
+# 灵枢开发环境 Docker Compose
+# 使用方法: docker-compose -f deploy/docker-compose/dev.yml up -d
+
+version: '3.8'
+
+services:
+  # =====================================================
+  # MySQL 8.0 数据库
+  # =====================================================
+  mysql:
+    image: mysql:8.0
+    container_name: lingxu-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: LingxuRoot2024!
+      MYSQL_DATABASE: lingxu
+      MYSQL_USER: lingxu
+      MYSQL_PASSWORD: LingxuDB2024!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --max-connections=1000
+    networks:
+      - lingxu-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =====================================================
+  # Redis 7.0+ 缓存和队列
+  # =====================================================
+  redis:
+    image: redis:7-alpine
+    container_name: lingxu-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: >
+      redis-server
+      --appendonly yes
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --tcp-keepalive 300
+    networks:
+      - lingxu-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =====================================================
+  # MinIO 对象存储
+  # =====================================================
+  minio:
+    image: minio/minio:latest
+    container_name: lingxu-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: lingxu
+      MINIO_ROOT_PASSWORD: LingxuMinio2024!
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - lingxu-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # =====================================================
+  # Prometheus 监控
+  # =====================================================
+  prometheus:
+    image: prom/prometheus:v2.48.0
+    container_name: lingxu-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    networks:
+      - lingxu-net
+
+  # =====================================================
+  # Grafana 监控面板
+  # =====================================================
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: lingxu-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: LingxuGrafana2024!
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - lingxu-net
+
+  # =====================================================
+  # Loki 日志收集
+  # =====================================================
+  loki:
+    image: grafana/loki:2.9.0
+    container_name: lingxu-loki
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki_data:/loki
+      - ./loki-config.yml:/etc/loki/local-config.yaml:ro
+    networks:
+      - lingxu-net
+
+  # =====================================================
+  # Go服务 (需要本地构建)
+  # =====================================================
+  # service:
+  #   build:
+  #     context: ../../
+  #     dockerfile: src/service/Dockerfile
+  #   container_name: lingxu-service
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - CONFIG_PATH=/app/config/config.yaml
+  #   volumes:
+  #     - ../../src/service/config:/app/config:ro
+  #   depends_on:
+  #     mysql:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   networks:
+  #     - lingxu-net
+
+  # =====================================================
+  # Node.js引擎 (需要本地构建)
+  # =====================================================
+  # engine:
+  #   build:
+  #     context: ../../
+  #     dockerfile: src/engine/Dockerfile
+  #   container_name: lingxu-engine
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - GATEWAY_URL=http://service:8080
+  #     - PORT=3000
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #   networks:
+  #     - lingxu-net
+
+# =====================================================
+# 卷定义
+# =====================================================
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+  minio_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  loki_data:
+    driver: local
+
+# =====================================================
+# 网络定义
+# =====================================================
+networks:
+  lingxu-net:
+    driver: bridge
