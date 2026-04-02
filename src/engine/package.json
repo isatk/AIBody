@@ -1,0 +1,25 @@
+{
+  "name": "@lingxu/founder-auth",
+  "version": "1.0.0",
+  "description": "Founder identity verification module for 灵枢",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "founder",
+    "identity",
+    "verification",
+    "face-recognition"
+  ],
+  "author": "Lotus Rina",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  }
+}
