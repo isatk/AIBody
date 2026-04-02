@@ -107,8 +107,8 @@ function getFounderHash(): string {
     return process.env.FOUNDER_PHOTO_HASH;
   }
   
-  // 默认哈希（应在首次配置后更新）
-  return process.env.FOUNDER_HASH || 'lotus_default_hash_2026';
+  // 创始人真实照片哈希（已锁定）
+  return process.env.FOUNDER_HASH || '2b83742cdb68b7796aec96f5b026afdc916c1b314735ce6a92891d244d91451b';
 }
 
 /**
